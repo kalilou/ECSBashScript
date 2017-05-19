@@ -2,7 +2,7 @@
  "containerDefinitions": [
     {
      "name": "nginx",
-     "image": "nginx",
+     "image": "AccountID.dkr.ecr.Region.amazonaws.com/imageName:tag",
      "portMappings": [
      {
         "containerPort": 80,
