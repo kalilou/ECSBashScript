@@ -7,7 +7,7 @@ export applicationName=YourapplicationName
 export clusterName=YourCluster
 export ecsServiceName=YourService
 export taskDefinitionName=YourTaskDefinitioFamily
-
+export DockerImageTag=ImageTag
 
 repo=`aws ecr describe-repositories --region $AWSRegion --repository-names $applicationName`
 
@@ -21,9 +21,9 @@ docker build -t $applicationName .
 
 eval $(aws ecr get-login --region $AWSRegion)
 
-docker tag $applicationName:latest $AWSAccountID.dkr.ecr.$AWSRegion.amazonaws.com/$applicationName:latest
+docker tag $applicationName:latest $AWSAccountID.dkr.ecr.$AWSRegion.amazonaws.com/$applicationName:$DockerImageTag
 
-docker push $AWSAccountID.dkr.ecr.$AWSRegion.amazonaws.com/$applicationName:latest
+docker push $AWSAccountID.dkr.ecr.$AWSRegion.amazonaws.com/$applicationName:$DockerImageTag
 
 
 taskRevision=`aws ecs register-task-definition --region $AWSRegion --cli-input-json file://./nginx_task.json | jq .taskDefinition.revision`
